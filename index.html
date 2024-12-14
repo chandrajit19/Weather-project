@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app</title>    
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="scrpt.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+ 
+</head>
+<body>
+
+    <div class="container">
+                <div class="search-box">
+                    <div class="search">
+                        <box-icon name='search' color='#ffffff' class="search-icon" ></box-icon>
+                        <form class="formSubmit">
+                            <input type="text" placeholder="Enter city..." class="city-name">
+                        </form>
+                    </div>
+                   
+                </div>
+
+                <div class="display-box">
+                    <p class="city">india<p/>
+                    <p class="time">January, 3 2:13</p>
+                    <p class="nature">Cloud</p>
+                    <p class="img">image</p>
+                    <p class="temp">270 deg</p>
+                    <p class="min-max">min:12 max:33</p>
+                </div>
+                <div class="invalid" ></div>
+
+                <div class="other-box">
+                       <div class="card">
+                        <box-icon type='solid' name='thermometer'></box-icon>
+                        <div>
+                            <p>Feels like</p>
+                            <span class="feels"></span>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <box-icon type='solid' name='droplet'></box-icon>
+                        <div>
+                            <p>Humidity</p>
+                            <span class="humidity"></span>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <box-icon name='wind'></box-icon>
+                        <div>
+                            <p>Wind</p>
+                            <span class="wind"></span>
+                        </div>
+                      </div>
+
+                      <div class="card">
+                        <box-icon name='water'></box-icon>
+                        <div>
+                            <p>Pressure</p>
+                            <span class="pressure"></span>
+                        </div>
+                      </div>
+
+                </div>
+    </div>
+
+   
+</body>
+</html>
