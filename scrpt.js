@@ -49,7 +49,7 @@ const invalidElement=document.querySelector('.invalid')
    })  
 
         const weatherData=async ()=>{
-            const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1cf36d4ccf33e0b036f49b35b9ca3edb`;
+            const URL = `hhttps://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1cf36d4ccf33e0b036f49b35b9ca3edb`;
 
         try {
             const response= await fetch(URL);
@@ -74,9 +74,9 @@ const invalidElement=document.querySelector('.invalid')
                         natureElement.textContent=weather[0].main;
                         imageElement.innerHTML=`<img width="100px" src="https://openweathermap.org/img/wn/${weather[0].icon}@4x.png"/>`;
 
-                    tempElement.innerHTML=`${main.temp}&#176`;
+                    tempElement.innerHTML=`${(main.temp-273.15).toFixed()}&#176 C`;
 
-                    minMaxElement.innerHTML=`min: ${main.temp_min.toFixed()}&#176  &nbsp;  &nbsp;  max:  ${main.temp_max.toFixed()}&#176`
+                    minMaxElement.innerHTML=`min: ${(main.temp_min-273.15).toFixed()}&#176 C  &nbsp;  &nbsp;  max:  ${(main.temp_max-273.15).toFixed()}&#176 C`
 
                     feelElement.innerHTML=`${main.feels_like}&#176`;
                     humidityElement.innerHTML=`${main.humidity}%`;
