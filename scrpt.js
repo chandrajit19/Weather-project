@@ -49,7 +49,7 @@ const invalidElement=document.querySelector('.invalid')
    })  
 
         const weatherData=async ()=>{
-            const URL = `hhttps://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1cf36d4ccf33e0b036f49b35b9ca3edb`;
+            const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1cf36d4ccf33e0b036f49b35b9ca3edb`;
 
         try {
             const response= await fetch(URL);
