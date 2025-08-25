@@ -15,22 +15,67 @@ const windElement=document.querySelector(".wind");
 const pressureElement=document.querySelector(".pressure")
 
 const submitElement=document.querySelector(".formSubmit");
-      
-
 // const displayElement= document.querySelector('.display-box')
 const invalidElement=document.querySelector('.invalid')
 
-   // getting country name
+// mapping of weather.main to your CSS class or asset key
+const mainToKey = {
+  Thunderstorm: 'thunder',
+  Drizzle: 'drizzle',
+  Rain: 'rain',
+  Snow: 'snow',
+  Mist: 'fog',
+  Smoke: 'fog',
+  Haze: 'fog',
+  Dust: 'fog',
+  Fog: 'fog',
+  Sand: 'fog',
+  Ash: 'fog',
+  Squall: 'wind',
+  Tornado: 'tornado',
+  Clear: 'clear',
+  Clouds: 'clouds'
+};
+
+
+function applyBackgroundFromWeather(weather) {
+  const w = weather[0]; // assume weather array exists
+  const main = w.main; // e.g. "Clear"
+  const icon = w.icon; // e.g. "01d" or "01n"
+  const isNight = icon && icon.endsWith("n");
+
+  const key = mainToKey[main] || "default";
+  console.log(main)
+  const el = document.querySelector(".container");
+  // remove previous classes (keep list small)
+  el.classList.remove(
+    "clear-day",
+    "clear-night",
+    "rain",
+    "snow",
+    "clouds",
+    "fog",
+    "thunder",
+    "drizzle",
+    "wind",
+    "tornado",
+    "default"
+  );
+  // decide final class name
+  const classname =
+    key === "clear" ? (isNight ? "clear-night" : "clear-day") : key;
+  el.classList.add(classname);
+}
+
+   // Functionn  to get country name
    const getCountryName=(code)=>{
       return  new Intl.DisplayNames([code], { type: 'region' }).of(code);
    }
 
- // getting date
+ // Functionn to get date formate
  const getDate=(dt)=>{
             const date =new Date(dt*1000) // second to milisecond
-           
-         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-           
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
             const formattedDate = date.toLocaleDateString('en-US', options);
             return formattedDate;
         }
@@ -70,11 +115,11 @@ const invalidElement=document.querySelector('.invalid')
                     cityElement.textContent=`${name}, ${ getCountryName(sys.country)}`
                     
                     timeElement.textContent=`${getDate(dt)}` 
-
+                        console.log(weather[0])
                         natureElement.textContent=weather[0].main;
-                        imageElement.innerHTML=`<img width="100px" src="https://openweathermap.org/img/wn/${weather[0].icon}@4x.png"/>`;
+                        imageElement.innerHTML=`<img width="100px" height="100px" alt="Weather icon" src="https://openweathermap.org/img/wn/${weather[0].icon}@4x.png"/>`;
 
-                    tempElement.innerHTML=`${(main.temp-273.15).toFixed()}&#176 C`;
+                        tempElement.innerHTML=`${(main.temp-273.15).toFixed()}&#176 C`;
 
                     minMaxElement.innerHTML=`min: ${(main.temp_min-273.15).toFixed()}&#176 C  &nbsp;  &nbsp;  max:  ${(main.temp_max-273.15).toFixed()}&#176 C`
 
@@ -82,6 +127,8 @@ const invalidElement=document.querySelector('.invalid')
                     humidityElement.innerHTML=`${main.humidity}%`;
                     windElement.innerHTML=`${wind.speed}m/s`;
                     pressureElement.innerHTML=`${main.pressure} hpa`;
+
+                    applyBackgroundFromWeather(weather);
 
             }
            
